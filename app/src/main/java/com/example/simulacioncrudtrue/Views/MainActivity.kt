@@ -1,13 +1,11 @@
 package com.example.simulacioncrudtrue.Views
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.widget.Button
 import android.widget.ImageView
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import com.example.simulacioncrudtrue.Data.RepositoryClient
 import com.example.simulacioncrudtrue.Logic.Interfaces.OperationsInterfaces
 import com.example.simulacioncrudtrue.R
 
@@ -16,6 +14,7 @@ class MainActivity : AppCompatActivity(), OperationsInterfaces {
     private lateinit var myButtonAdd: ImageView
     private lateinit var myButtonEdit: ImageView
     private lateinit var myButtonDelete: ImageView
+    private lateinit var buttonGoToSecond: Button
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,6 +35,7 @@ class MainActivity : AppCompatActivity(), OperationsInterfaces {
         myButtonAdd = findViewById(R.id.iv_add)
         myButtonEdit = findViewById(R.id.iv_edit)
         myButtonDelete = findViewById(R.id.iv_del)
+        buttonGoToSecond = findViewById(R.id.second_Activity)
 
         //Funciones con lambda para que al pulsar esos botones tengan una funcion
         myButtonAdd.setOnClickListener{ //Se ponen llaves para directamente hacerles la logica
@@ -46,6 +46,10 @@ class MainActivity : AppCompatActivity(), OperationsInterfaces {
         }
         myButtonDelete.setOnClickListener{
             Log.d(TAG, "He pulsado el boton BORRAR")
+        }
+        buttonGoToSecond.setOnClickListener {
+            val intent = Intent(this, SecondActivity::class.java)
+            startActivity(intent)
         }
     }
 

@@ -1,5 +1,6 @@
 package com.example.simulacioncrudtrue.Views
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
@@ -13,6 +14,7 @@ class SecondActivity : AppCompatActivity(), OperationsInterfaces {
     private lateinit var buttonAddClient: Button
     private lateinit var buttonEditClient: Button
     private lateinit var buttonDeleteClient: Button
+    private lateinit var buttonBackToMain: Button
 
     private lateinit var controller: Controller
     private lateinit var dialog: Dialog
@@ -21,30 +23,34 @@ class SecondActivity : AppCompatActivity(), OperationsInterfaces {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_second)
 
-        // Controlador y el dialog
         controller = Controller()
         dialog = Dialog(controller)
         dialog.setListener(this)
 
-        // Los botones
         buttonAddClient = findViewById(R.id.button_add_client)
         buttonEditClient = findViewById(R.id.button_edit_client)
         buttonDeleteClient = findViewById(R.id.button_delete_client)
+        buttonBackToMain = findViewById(R.id.botonMain)
 
-        // Acciones de los botones
         buttonAddClient.setOnClickListener {
             Log.d(TAG, "Botón de añadir cliente pulsado")
-            dialog.show(0) // Acción para añadir
+            dialog.show(0)
         }
 
         buttonEditClient.setOnClickListener {
             Log.d(TAG, "Botón de editar cliente pulsado")
-            dialog.show(1) // Acción para editar
+            dialog.show(1)
         }
 
         buttonDeleteClient.setOnClickListener {
             Log.d(TAG, "Botón de eliminar cliente pulsado")
-            dialog.show(2) // Acción para eliminar
+            dialog.show(2)
+        }
+
+        // Navegar de vuelta a MainActivity
+        buttonBackToMain.setOnClickListener {
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
         }
     }
 
@@ -52,19 +58,15 @@ class SecondActivity : AppCompatActivity(), OperationsInterfaces {
         const val TAG = "---SecondActivity---"
     }
 
-    // Implementación de los métodos de la interfaz OperationsInterfaces
     override fun ClientAdd(id: Int, name: String) {
         Log.d(TAG, "Cliente añadido: ID=$id, Nombre=$name")
-
     }
 
     override fun ClientDel(id: Int) {
         Log.d(TAG, "Cliente eliminado: ID=$id")
-
     }
 
     override fun ClientUpdate(id: Int, name: String) {
         Log.d(TAG, "Cliente actualizado: ID=$id, Nombre=$name")
-
     }
 }
